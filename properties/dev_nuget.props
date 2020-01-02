@@ -1,0 +1,9 @@
+<Project>
+  <!-- Nuget package properties when packed using dotnet pack. -->
+  <PropertyGroup>
+    <PackageVersion>$(NupkgVersion)</PackageVersion>
+    <Authors>James Eastham</Authors>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(RepoRoot)bin\$(Configuration)\nugets</PackageOutputPath>
+  </PropertyGroup>
+</Project>

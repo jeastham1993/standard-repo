@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)..\properties\dev_managed_netcore.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\properties\dev_managed_stylecop.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\properties\dev_nuget.props" />
+
+  <PropertyGroup>
+    <OutputPath>$(RepoRoot)bin\$(Configuration)\prod\$(MSBuildProjectName)\</OutputPath>
+
+    <!-- Stylecop needs the documentation file to exist -->
+    <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
+  </PropertyGroup>
+</Project>

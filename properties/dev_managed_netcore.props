@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="dev_common.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn></NoWarn>
+    <!-- Don't append TargetFramework to output path. -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+   </PropertyGroup>
+
+  <!-- Cls Compliant -->
+  <PropertyGroup>
+    <AssemblyClsCompliant>true</AssemblyClsCompliant>
+  </PropertyGroup>
+
+  <!-- set DebugType to full -->
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <!-- Set AllowUnsafeBlocks to false -->
+  <PropertyGroup>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Product>James Eastham</Product>
+    <Copyright>Copyright (c) James Eastham.  All rights reserved.</Copyright>
+    <Authors>James Eastham</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Define optional Constants used in code for netstandard 2.0. -->
+    <DefineConstants>$(DefineConstants);DotNetCoreClr</DefineConstants>
+  </PropertyGroup>
+
+</Project>
