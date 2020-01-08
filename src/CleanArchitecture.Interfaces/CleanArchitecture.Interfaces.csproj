@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>CleanArchitecture.Interfaces</AssemblyName>
+    <RootNamespace>CleanArchitecture.Interfaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CleanArchitecture.UseCases\CleanArchitecture.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>

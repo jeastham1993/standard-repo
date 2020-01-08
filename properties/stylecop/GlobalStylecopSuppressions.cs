@@ -1,5 +1,5 @@
 // ------------------------------------------------------------
-// Copyright (c) Workflow Doctor Ltd.
+// Copyright (c) James Eastham.
 // ------------------------------------------------------------
 using System.Diagnostics.CodeAnalysis;
 

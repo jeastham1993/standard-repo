@@ -12,4 +12,7 @@
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <StylecopSuppressionsFile>$(StylecopSuppressionsFile);$(MSBuildThisFileDirectory)..\properties\stylecop\TestStylecopSuppressions.cs</StylecopSuppressionsFile>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.0" />
+  </ItemGroup>
 </Project>
