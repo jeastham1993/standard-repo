@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using CleanArchitecture.Entities.Exceptions;
 
-namespace CleanArchitecture.Entities
+namespace CleanArchitecture.Core.Entities
 {
     /// <summary>
     /// Encapsulates all code for managing loans.
@@ -20,7 +20,7 @@ namespace CleanArchitecture.Entities
         /// <param name="principal">The principal valie of the loan.</param>
         /// <param name="rate">The annual interest rate percentage.</param>
         /// <param name="period">The term of the loan.</param>
-        public Loan(decimal principal, decimal rate, decimal period)
+        internal Loan(decimal principal, decimal rate, decimal period)
         {
             this.Principal = principal;
             this.Rate = rate;

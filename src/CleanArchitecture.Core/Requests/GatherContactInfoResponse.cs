@@ -5,21 +5,21 @@
 using System;
 using System.Collections.Generic;
 
-namespace CleanArchitecture.UseCases
+namespace CleanArchitecture.Core.Requests
 {
     /// <summary>
     /// Response from a successul gather of ContractInfo.
     /// </summary>
     public class GatherContactInfoResponse
+        : BaseResponse
     {
-        private List<string> _errors;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GatherContactInfoResponse"/> class.
-        /// </summary>
-        internal GatherContactInfoResponse()
+        internal GatherContactInfoResponse(string name, string address, DateTime dateOfBirth, string nationalInsuranceNumber)
+            : base()
         {
-            this._errors = new List<string>(0);
+            this.Name = name;
+            this.Address = address;
+            this.DateOfBirth = dateOfBirth;
+            this.NationalInsuranceNumber = nationalInsuranceNumber;
         }
 
         /// <summary>
@@ -45,21 +45,6 @@ namespace CleanArchitecture.UseCases
         /// <summary>
         /// Gets or sets the applicants credit score.
         /// </summary>
-        public int CreditScore { get; set; }
-
-        /// <summary>
-        /// Gets any error messages.
-        /// </summary>
-        public IReadOnlyCollection<string> Errors => this._errors;
-
-        internal void AddError(string errorMessage)
-        {
-            if (this._errors == null)
-            {
-                this._errors = new List<string>(1);
-            }
-
-            this._errors.Add(errorMessage);
-        }
+        public decimal CreditScore { get; set; }
     }
 }

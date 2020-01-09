@@ -3,22 +3,14 @@
 // ------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using CleanArchitecture.Entities;
 
-namespace CleanArchitecture.UseCases
+namespace CleanArchitecture.Core.Requests
 {
     /// <summary>
     /// Gather required data for a new loan.
     /// </summary>
     public class GatherContactInfoRequest
     {
-        private string _name;
-        private string _address;
-        private DateTime _dateOfBirth;
-        private string _niNumber;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GatherContactInfoRequest"/> class.
         /// </summary>
@@ -28,26 +20,30 @@ namespace CleanArchitecture.UseCases
         /// <param name="nationalInsuranceNumber">The applicants NI number.</param>
         public GatherContactInfoRequest(string name, string address, DateTime dateOfBirth, string nationalInsuranceNumber)
         {
-            this._name = name;
-            this._address = address;
-            this._dateOfBirth = dateOfBirth;
-            this._niNumber = nationalInsuranceNumber;
+            this.Name = name;
+            this.Address = address;
+            this.DateOfBirth = dateOfBirth;
+            this.NationalInsuranceNumber = nationalInsuranceNumber;
         }
 
         /// <summary>
-        /// Execute a GatherContractInfoRequest.
+        /// Gets the name.
         /// </summary>
-        /// <returns>A <see cref="GatherContactInfoResponse"/>.</returns>
-        public GatherContactInfoResponse Execute()
-        {
-            var response = new GatherContactInfoResponse();
+        public string Name { get; private set; }
 
-            if (string.IsNullOrEmpty(this._name))
-            {
-                response.AddError("Name cannot be empty");
-            }
+        /// <summary>
+        /// Gets the address.
+        /// </summary>
+        public string Address { get; private set; }
 
-            return response;
-        }
+        /// <summary>
+        /// Gets the date of birth.
+        /// </summary>
+        public DateTime DateOfBirth { get; private set; }
+
+        /// <summary>
+        /// Gets the National Insurance number.
+        /// </summary>
+        public string NationalInsuranceNumber { get; private set; }
     }
 }

@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CleanArchitecture.Entities\CleanArchitecture.Entities.csproj" />
-    <ProjectReference Include="..\..\src\CleanArchitecture.Interfaces\CleanArchitecture.Interfaces.csproj" />
-    <ProjectReference Include="..\..\src\CleanArchitecture.UseCases\CleanArchitecture.UseCases.csproj" />
+    <ProjectReference Include="..\..\src\CleanArchitecture.UseCases\CleanArchitecture.Core.csproj" />
   </ItemGroup>
 
 </Project>

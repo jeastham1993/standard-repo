@@ -4,15 +4,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace CleanArchitecture.Entities
+[assembly: InternalsVisibleTo("CleanArchitecture.UnitTest")]
+
+namespace CleanArchitecture.Core.Entities
 {
     /// <summary>
     /// Encapsulates all logic for a customer entity.
     /// </summary>
     public class Customer
     {
+        private int _age;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Customer"/> class.
         /// </summary>
@@ -20,7 +25,7 @@ namespace CleanArchitecture.Entities
         /// <param name="address">The new customers address.</param>
         /// <param name="dateOfBirth">The new customers date of birth.</param>
         /// <param name="nationalInsuranceNumber">The new customers national insurance number.</param>
-        public Customer(string name, string address, DateTime dateOfBirth, string nationalInsuranceNumber)
+        internal Customer(string name, string address, DateTime dateOfBirth, string nationalInsuranceNumber)
         {
             this.CustomerId = Guid.NewGuid().ToString();
             this.Name = name;
@@ -57,5 +62,34 @@ namespace CleanArchitecture.Entities
         /// Gets the national insurance number of the customer.
         /// </summary>
         public string NationalInsuranceNumber { get; private set; }
+
+        /// <summary>
+        /// Gets the customers credit score.
+        /// </summary>
+        public decimal CreditScore { get; private set; }
+
+        /// <summary>
+        /// Gets the age of the person based on their <see cref="Customer.DateOfBirth"/>.
+        /// </summary>
+        public int Age
+        {
+            get
+            {
+                if (this._age <= 0)
+                {
+                    this._age = new DateTime(DateTime.Now.Subtract(this.DateOfBirth).Ticks).Year - 1;
+                }
+
+                return this._age;
+            }
+        }
+
+        internal void UpdateCreditScore(decimal newCreditScore)
+        {
+            if (newCreditScore != this.CreditScore)
+            {
+                this.CreditScore = newCreditScore;
+            }
+        }
     }
 }

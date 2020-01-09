@@ -3,6 +3,7 @@
 // ------------------------------------------------------------
 
 using System;
+using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Entities;
 using CleanArchitecture.Entities.Exceptions;
 using FluentAssertions;

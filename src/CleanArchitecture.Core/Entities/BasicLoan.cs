@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CleanArchitecture.Entities
+namespace CleanArchitecture.Core.Entities
 {
     /// <summary>
     /// A basic loan implementation.
     /// </summary>
-    internal class BasicLoan : Loan
+    public class BasicLoan : Loan
     {
-        public BasicLoan(decimal principal, decimal rate, decimal term)
+        internal BasicLoan(decimal principal, decimal rate, decimal term)
             : base(principal, rate, term)
         {
         }

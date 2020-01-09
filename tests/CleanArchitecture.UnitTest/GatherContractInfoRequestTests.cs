@@ -6,8 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CleanArchitecture.UseCases;
+using System.Threading.Tasks;
+using CleanArchitecture.Core.Entities;
+using CleanArchitecture.Core.Requests;
+using CleanArchitecture.Core.Services;
 using FluentAssertions;
+using Moq;
 using Xunit;
 
 namespace CleanArchitecture.UnitTest
@@ -28,24 +32,86 @@ namespace CleanArchitecture.UnitTest
         }
 
         [Fact]
-        public void CanExecute_ShouldComplete()
+        public async Task CanExecute_ShouldComplete()
         {
+            var handler = this.CreateHandler(requiredCreditScore: 600);
+
             var gatherContractInfoRequest = new GatherContactInfoRequest(Name, Address, this.dateOfBirth, NationalInsuranceNumber);
 
-            var gatherContractInfoResponse = gatherContractInfoRequest.Execute();
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
 
             gatherContractInfoResponse.Should().NotBeNull();
             gatherContractInfoResponse.Errors.Count().Should().Be(0);
         }
 
         [Fact]
-        public void CanExecute_ShouldReturnErrorOnInvalidName()
+        public async Task CanExecute_ShouldReturnErrorOnInvalidName()
         {
+            var handler = this.CreateHandler(requiredCreditScore: 600);
+
             var gatherContractInfoRequest = new GatherContactInfoRequest(string.Empty, Address, this.dateOfBirth, NationalInsuranceNumber);
 
-            var gatherContractInfoResponse = gatherContractInfoRequest.Execute();
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
 
             gatherContractInfoResponse.Errors.Count().Should().Be(1);
+        }
+
+        [Fact]
+        public async Task CanExecute_ShouldReturnErrorOnEmptyAddress()
+        {
+            var handler = this.CreateHandler(requiredCreditScore: 600);
+
+            var gatherContractInfoRequest = new GatherContactInfoRequest(Name, string.Empty, this.dateOfBirth, NationalInsuranceNumber);
+
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
+
+            gatherContractInfoResponse.Errors.Count().Should().Be(1);
+        }
+
+        [Fact]
+        public async Task CanExecute_ShouldReturnErrorOnAge()
+        {
+            var handler = this.CreateHandler(requiredCreditScore: 600);
+
+            var gatherContractInfoRequest = new GatherContactInfoRequest(Name, Address, DateTime.Now.AddYears(-1), NationalInsuranceNumber);
+
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
+
+            gatherContractInfoResponse.Errors.Count().Should().Be(1);
+        }
+
+        [Fact]
+        public async Task CanExecute_ShouldReturnErrorOnNiNumber()
+        {
+            var handler = this.CreateHandler(requiredCreditScore: 600);
+
+            var gatherContractInfoRequest = new GatherContactInfoRequest(Name, Address, this.dateOfBirth, string.Empty);
+
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
+
+            gatherContractInfoResponse.Errors.Count().Should().Be(1);
+        }
+
+        [Fact]
+        public async Task CanExecute_ShouldReturnErrorOnCreditScore()
+        {
+            var handler = this.CreateHandler(requiredCreditScore: 150);
+
+            var gatherContractInfoRequest = new GatherContactInfoRequest(Name, Address, this.dateOfBirth, NationalInsuranceNumber);
+
+            var gatherContractInfoResponse = await handler.Handle(gatherContractInfoRequest).ConfigureAwait(false);
+
+            gatherContractInfoResponse.Errors.Count().Should().Be(1);
+        }
+
+        private GatherContactInfoRequestHandler CreateHandler(decimal requiredCreditScore)
+        {
+            var creditScoreChecker = new Mock<ICreditScoreService>();
+            creditScoreChecker.Setup(p => p.GetCreditScoreAsync(It.IsAny<string>())).ReturnsAsync(requiredCreditScore).Verifiable();
+
+            var customerDatabase = new Mock<ICustomerDatabase>();
+
+            return new GatherContactInfoRequestHandler(creditScoreChecker.Object, customerDatabase.Object);
         }
     }
 }

@@ -3,15 +3,16 @@
 // ------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.CompilerServices;
 
-namespace CleanArchitecture.Entities
+[assembly: InternalsVisibleTo("CleanArchitecture.UnitTest")]
+
+namespace CleanArchitecture.Core.Entities
 {
     /// <summary>
     /// A factory for creating loans.
     /// </summary>
-    public static class LoanFactory
+    internal static class LoanFactory
     {
         /// <summary>
         /// Create a new loan object.
@@ -21,7 +22,7 @@ namespace CleanArchitecture.Entities
         /// <param name="rate">The annual interest rate percentage of the loan.</param>
         /// <param name="period">The period over which the loan was take.</param>
         /// <returns>A <see cref="Loan"/>/.</returns>
-        public static Loan CreateLoan(string type, decimal principal, decimal rate, decimal period)
+        internal static Loan CreateLoan(string type, decimal principal, decimal rate, decimal period)
         {
             var loan = type switch
             {
