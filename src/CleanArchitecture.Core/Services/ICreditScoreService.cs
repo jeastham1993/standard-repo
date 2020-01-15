@@ -19,6 +19,6 @@ namespace CleanArchitecture.Core.Services
         /// </summary>
         /// <param name="nationalInsuranceNumber">A National Insurance number.</param>
         /// <returns>The <see cref="decimal"/> credit score rating.</returns>
-        Task<decimal> GetCreditScoreAsync(string nationalInsuranceNumber);
+        decimal GetCreditScore(string nationalInsuranceNumber);
     }
 }

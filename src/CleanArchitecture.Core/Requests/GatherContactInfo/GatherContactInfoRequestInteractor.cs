@@ -12,17 +12,18 @@ namespace CleanArchitecture.Core.Requests
     /// <summary>
     /// Handles a <see cref="GatherContactInfoRequest"/>.
     /// </summary>
-    public class GatherContactInfoRequestHandler
+    public class GatherContactInfoRequestInteractor
+        : IRequestHandler<GatherContactInfoRequest, GatherContactInfoResponse>
     {
         private readonly ICreditScoreService _creditScoreService;
         private readonly ICustomerDatabase _customerDatabase;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GatherContactInfoRequestHandler"/> class.
+        /// Initializes a new instance of the <see cref="GatherContactInfoRequestInteractor"/> class.
         /// </summary>
         /// <param name="creditScoreService">A <see cref="ICreditScoreService"/>.</param>
         /// <param name="customerDatabase">A <see cref="ICustomerDatabase"/>.</param>
-        public GatherContactInfoRequestHandler(ICreditScoreService creditScoreService, ICustomerDatabase customerDatabase)
+        public GatherContactInfoRequestInteractor(ICreditScoreService creditScoreService, ICustomerDatabase customerDatabase)
         {
             this._creditScoreService = creditScoreService;
             this._customerDatabase = customerDatabase;
@@ -33,7 +34,7 @@ namespace CleanArchitecture.Core.Requests
         /// </summary>
         /// <param name="request">A <see cref="GatherContactInfoRequest"/>.</param>
         /// <returns>A <see cref="GatherContactInfoResponse"/>.</returns>
-        public async Task<GatherContactInfoResponse> Handle(GatherContactInfoRequest request)
+        public GatherContactInfoResponse Handle(GatherContactInfoRequest request)
         {
             if (request is null)
             {
@@ -70,12 +71,11 @@ namespace CleanArchitecture.Core.Requests
 
             if (response.HasError == false)
             {
-                response.CreditScore = await this._creditScoreService.GetCreditScoreAsync(request.NationalInsuranceNumber)
-                    .ConfigureAwait(false);
+                response.CreditScore = this._creditScoreService.GetCreditScore(request.NationalInsuranceNumber);
 
                 if (response.CreditScore > 500)
                 {
-                    await this._customerDatabase.StoreAsync(customerRecord).ConfigureAwait(false);
+                    this._customerDatabase.Store(customerRecord);
                 }
                 else
                 {

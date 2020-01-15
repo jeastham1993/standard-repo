@@ -10,6 +10,7 @@ namespace CleanArchitecture.Core.Requests
     /// Gather required data for a new loan.
     /// </summary>
     public class GatherContactInfoRequest
+        : IRequest<GatherContactInfoResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GatherContactInfoRequest"/> class.

@@ -18,7 +18,6 @@ namespace CleanArchitecture.Core.Entities
         /// Store the customer object in the database.
         /// </summary>
         /// <param name="customer">The <see cref="Customer"/> to be stored.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public Task StoreAsync(Customer customer);
+        public void Store(Customer customer);
     }
 }
