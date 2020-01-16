@@ -6,12 +6,12 @@ using System;
 using System.Threading.Tasks;
 using CleanArchitecture.Core.Services;
 
-namespace CleanArchitecture.Infrastructure
+namespace CleanArchitecture.ConsoleApp
 {
     /// <summary>
     /// Encapsulates all logic for running credit checks.
     /// </summary>
-    public class CreditScoreService
+    public class MockCreditScoreService
         : ICreditScoreService
     {
         /// <inheritdoc/>

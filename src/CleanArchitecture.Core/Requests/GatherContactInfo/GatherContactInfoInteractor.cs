@@ -12,18 +12,18 @@ namespace CleanArchitecture.Core.Requests
     /// <summary>
     /// Handles a <see cref="GatherContactInfoRequest"/>.
     /// </summary>
-    public class GatherContactInfoRequestInteractor
+    public class GatherContactInfoInteractor
         : IRequestHandler<GatherContactInfoRequest, GatherContactInfoResponse>
     {
         private readonly ICreditScoreService _creditScoreService;
         private readonly ICustomerDatabase _customerDatabase;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GatherContactInfoRequestInteractor"/> class.
+        /// Initializes a new instance of the <see cref="GatherContactInfoInteractor"/> class.
         /// </summary>
         /// <param name="creditScoreService">A <see cref="ICreditScoreService"/>.</param>
         /// <param name="customerDatabase">A <see cref="ICustomerDatabase"/>.</param>
-        public GatherContactInfoRequestInteractor(ICreditScoreService creditScoreService, ICustomerDatabase customerDatabase)
+        public GatherContactInfoInteractor(ICreditScoreService creditScoreService, ICustomerDatabase customerDatabase)
         {
             this._creditScoreService = creditScoreService;
             this._customerDatabase = customerDatabase;

@@ -104,14 +104,14 @@ namespace CleanArchitecture.UnitTest
             gatherContractInfoResponse.Errors.Count().Should().Be(1);
         }
 
-        private GatherContactInfoRequestInteractor CreateHandler(decimal requiredCreditScore)
+        private GatherContactInfoInteractor CreateHandler(decimal requiredCreditScore)
         {
             var creditScoreChecker = new Mock<ICreditScoreService>();
             creditScoreChecker.Setup(p => p.GetCreditScore(It.IsAny<string>())).Returns(requiredCreditScore).Verifiable();
 
             var customerDatabase = new Mock<ICustomerDatabase>();
 
-            return new GatherContactInfoRequestInteractor(creditScoreChecker.Object, customerDatabase.Object);
+            return new GatherContactInfoInteractor(creditScoreChecker.Object, customerDatabase.Object);
         }
     }
 }

@@ -46,5 +46,10 @@ namespace CleanArchitecture.Core.Requests
         /// Gets or sets the applicants credit score.
         /// </summary>
         public decimal CreditScore { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the customer has been accepted for a loan.
+        /// </summary>
+        public bool IsAcceptedForLoan { get; private set; }
     }
 }

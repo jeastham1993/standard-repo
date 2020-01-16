@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
 
-namespace CleanArchitecture.Infrastructure
+namespace CleanArchitecture.ConsoleApp
 {
     /// <summary>
     /// Encapsulates code for in memory database repository.
