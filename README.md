@@ -1,10 +1,13 @@
-# <Project name>
+# Clean Architecture Sample
 
-<project description>
+This repo contains a sample project structure for writing an application using 'Clean Architecture' practices. For more detail, you can find a blog post [here](https://dev.to/jeastham1993/clean-architecture-in-net-core-56gh) that provides some context.
 
 This repo contains the following applications:
 
-- 
+- CleanArchitecture.Core *Core code of the application*
+- CleanArchitecture.Infrastructure *Implementations of required infrastructure interfaces (DB, local disk storage etc)*
+- CleanArchitecture.Console *A implementation of the application in a .NET core console application*
+- CleanArchitecture.WebApi *A RESTful Web api implementation of the application*
 
 ## Getting Started
 
@@ -37,13 +40,7 @@ dotnet publish src/prod.sln -c Release -r win10-x64
 
 Each project can also be built individually directly through Visual Studio. You can open the solution file all.sln in repo root to load all service and test projects.
 
-## Releases
-
-
-### Generate release ready files locally
-
-
 ## Documentation
 
-These articles will help get you started:
+For running the code locally, I'd recommend using the all.sln file. This contains all of the source code related to the project and can be built as a whole solution.
 
