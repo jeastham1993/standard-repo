@@ -3,8 +3,6 @@
 // ------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Requests;
@@ -48,7 +46,7 @@ namespace CleanArchitecture.WebApi.Controllers
         /// <param name="getContactInfo">A <see cref="GetContactInfoDTO"/>.</param>
         /// <returns>A <see cref="GatherContactInfoResponse"/>.</returns>
         [HttpPost]
-        public async Task<GatherContactInfoResponse> GatherContactInfo([FromBody] GetContactInfoDTO getContactInfo)
+        public GatherContactInfoResponse GatherContactInfo([FromBody] GetContactInfoDTO getContactInfo)
         {
             if (getContactInfo is null)
             {
@@ -61,11 +59,11 @@ namespace CleanArchitecture.WebApi.Controllers
                 getContactInfo.DateOfBirth,
                 getContactInfo.NationalInsuranceNumber);
 
-            var requestHandler = new GatherContactInfoRequestHandler(
+            var requestHandler = new GatherContactInfoInteractor(
                 this._creditScoreService,
                 this._customerDatabase);
 
-            return await requestHandler.Handle(request).ConfigureAwait(false);
+            return requestHandler.Handle(request);
         }
     }
 }
